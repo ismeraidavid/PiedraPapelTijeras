@@ -1,3 +1,8 @@
+// Variables para la puntuación final
+
+let humanScore = 0;
+let computerScore = 0;
+
 // Decisión del ordenador
 
 function getComputerChoice() {
@@ -17,7 +22,7 @@ function getComputerChoice() {
 
 }
 
-// Decisión del jugador
+// Decisión del humano
 
 function getHumanChoice(playerChoice) {
     let HumanChoice = playerChoice;
@@ -34,12 +39,10 @@ function getHumanChoice(playerChoice) {
     }
 }
 
-// Ronda
+// Función para jugar una ronda del juego
 
 function playRound(humanChoice, computerChoice) {
    
-    humanScore = 0;
-    computerScore = 0;
 
     // Si el jugador elige Piedra
     if (humanChoice === "piedra") {
@@ -79,18 +82,31 @@ function playRound(humanChoice, computerChoice) {
         }
     }
 // Marcador
-    console.log(`Marcador ---- HUMANO: ${humanScore} - ORDENADOR: ${computerScore}`);
+    if (humanScore === 5) {
+        humanScore = 0;
+        computerScore = 0;
+        panelPuntos.textContent = "¡¡FINAL DEL JUEGO!! ¡Gana el humano!";
 
+    } else if (computerScore === 5) {
+        humanScore = 0;
+        computerScore = 0;
+        panelPuntos.textContent = "¡¡FINAL DEL JUEGO!! ¡Gana el ordenador!";
+    } else{
+        panelPuntos.textContent = '';
+        panelPuntos.textContent = `HUMANO: ${humanScore} - ORDENADOR: ${computerScore}`;
+    }
     
 }
 
-// Referencias
+
+
+// Referencias al DOM
 
 const boton_piedra = document.querySelector("#btn_piedra");
 const boton_papel = document.querySelector("#btn_papel");
 const boton_tijeras = document.querySelector("#btn_tijeras");
-const boton_test = document.querySelector("#test");
 const panelResultados = document.querySelector("#resultados");
+const panelPuntos = document.querySelector("#puntos");
 
 // Eventos de los botones del jugador 
 
@@ -105,29 +121,3 @@ boton_papel.addEventListener("click", function () {
 boton_tijeras.addEventListener("click", function () {
     playRound(getHumanChoice("tijeras"), getComputerChoice())
 });
-
-
-// Resultados
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-boton_test.addEventListener("click", function() {
-    getHumanChoice("piedra");
-});
-
-
-
-
-
