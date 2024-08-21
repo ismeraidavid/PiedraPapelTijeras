@@ -19,8 +19,8 @@ function getComputerChoice() {
 
 // Decisión del jugador
 
-function getHumanChoice() {
-    let HumanChoice = prompt("¿Cuál es tu elección?");
+function getHumanChoice(playerChoice) {
+    let HumanChoice = playerChoice;
     let HumanChoiceLower = HumanChoice.toLowerCase();
     if (HumanChoiceLower === "piedra") {
         return HumanChoiceLower;
@@ -34,50 +34,48 @@ function getHumanChoice() {
     }
 }
 
-// Partida a 5 rondas con sistema de puntos
+// Ronda
 
 function playRound(humanChoice, computerChoice) {
+   
     humanScore = 0;
     computerScore = 0;
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-
 
     // Si el jugador elige Piedra
-    if (humanSelection === "piedra") {
+    if (humanChoice === "piedra") {
         choiceHuman = "piedra"
-        if (humanSelection === computerSelection) {
-            console.log(`¡Empate! Ambos habéis escogido: ${humanSelection} `);
-        } else if (humanSelection === choiceHuman && computerSelection === "papel") {
+        if (humanChoice === computerChoice) {
+            console.log(`¡Empate! Ambos habéis escogido: ${humanChoice} `);
+        } else if (humanChoice === choiceHuman && computerChoice === "papel") {
             computerScore++;
-            console.log(`¡Gana el ordenador! ${computerSelection} gana a ${humanSelection}`)
-        } else if (humanSelection === choiceHuman && computerSelection === "tijeras") {
+            console.log(`¡Gana el ordenador! ${computerChoice} gana a ${humanChoice}`)
+        } else if (humanChoice === choiceHuman && computerChoice === "tijeras") {
             humanScore++;
-            console.log(`¡Gana el humano! ${humanSelection} gana a ${computerSelection}`)
+            console.log(`¡Gana el humano! ${humanChoice} gana a ${computerChoice}`)
         }
         // Si el jugador elige Papel
-    } else if (humanSelection === "papel") {
+    } else if (humanChoice === "papel") {
         choiceHuman = "papel"
-        if (humanSelection === computerSelection) {
-            console.log(`¡Empate! Ambos habéis escogido: ${humanSelection} `);
-        } else if (humanSelection === choiceHuman && computerSelection === "tijeras") {
+        if (humanChoice === computerChoice) {
+            console.log(`¡Empate! Ambos habéis escogido: ${humanChoice} `);
+        } else if (humanChoice === choiceHuman && computerChoice === "tijeras") {
             computerScore++;
-            console.log(`¡Gana el ordenador! ${computerSelection} gana a ${humanSelection}`)
-        } else if (humanSelection === choiceHuman && computerSelection === "piedra") {
+            console.log(`¡Gana el ordenador! ${computerChoice} gana a ${humanChoice}`)
+        } else if (humanChoice === choiceHuman && computerChoice === "piedra") {
             humanScore++;
-            console.log(`¡Gana el humano! ${humanSelection} gana a ${computerSelection}`)
+            console.log(`¡Gana el humano! ${humanChoice} gana a ${computerChoice}`)
         }
         // Si el jugador elige Tijeras
-    } else if (humanSelection === "tijeras") {
+    } else if (humanChoice === "tijeras") {
         choiceHuman = "tijeras"
-        if (humanSelection === computerSelection) {
-            console.log(`¡Empate! Ambos habéis escogido: ${humanSelection} `);
-        } else if (humanSelection === choiceHuman && computerSelection === "piedra") {
+        if (humanChoice === computerChoice) {
+            console.log(`¡Empate! Ambos habéis escogido: ${humanChoice} `);
+        } else if (humanChoice === choiceHuman && computerChoice === "piedra") {
             computerScore++;
-            console.log(`¡Gana el ordenador! ${computerSelection} gana a ${humanSelection}`)
-        } else if (humanSelection === choiceHuman && computerSelection === "papel") {
+            console.log(`¡Gana el ordenador! ${computerChoice} gana a ${humanChoice}`)
+        } else if (humanChoice === choiceHuman && computerChoice === "papel") {
             humanScore++;
-            console.log(`¡Gana el humano! ${humanSelection} gana a ${computerSelection}`)
+            console.log(`¡Gana el humano! ${humanChoice} gana a ${computerChoice}`)
         }
     }
 // Marcador
@@ -85,4 +83,35 @@ function playRound(humanChoice, computerChoice) {
 
     
 }
-playRound();
+
+// Referencias de los botones del jugador 
+
+const boton_piedra = document.querySelector("#btn_piedra");
+const boton_papel = document.querySelector("#btn_papel");
+const boton_tijeras = document.querySelector("#btn_tijeras");
+const boton_test = document.querySelector("#test");
+
+// Eventos de los botones del jugador 
+
+boton_piedra.addEventListener("click", function () {
+    playRound(getHumanChoice("piedra"), getComputerChoice())
+});
+
+boton_papel.addEventListener("click", function () {
+    playRound(getHumanChoice("papel"), getComputerChoice())
+});
+
+boton_tijeras.addEventListener("click", function () {
+    playRound(getHumanChoice("tijeras"), getComputerChoice())
+});
+
+
+
+boton_test.addEventListener("click", function() {
+    getHumanChoice("piedra");
+});
+
+
+
+
+
